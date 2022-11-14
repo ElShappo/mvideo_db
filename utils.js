@@ -370,6 +370,40 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let System_unit = sequelize.define("system_unit", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    cpu_type: {
+      type: DataTypes.STRING
+    },
+    ram_size: {
+      type: DataTypes.INTEGER
+    },
+    video_card: {
+      type: DataTypes.STRING,
+    },
+    ssd_size: {
+      type: DataTypes.INTEGER
+    },
+    vram_size: {
+      type: DataTypes.INTEGER
+    },
+    os: {
+      type: DataTypes.TEXT
+    },
+    guarantee_period: {
+      type: DataTypes.INTEGER
+    }
+  },
+  {timestamps: false,});
+
 (async () => {
   try {
     await sequelize.authenticate();
@@ -399,3 +433,4 @@ let User = sequelize.define("user", {
     module.exports.Video_recorder = Video_recorder;
     module.exports.Tv = Tv;
     module.exports.Tablet = Tablet;
+    module.exports.System_unit = System_unit;

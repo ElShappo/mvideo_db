@@ -1,6 +1,6 @@
 'use strict';
 const {faker} = require('@faker-js/faker');
-const {retrieveArray, createCategoryItems, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder, Tv, Tablet} = require('./utils')
+const {retrieveArray, createCategoryItems, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder, Tv, Tablet, System_unit} = require('./utils')
 
 // import generators 
 const {createRandomUserService} = require('./generators/user');
@@ -13,6 +13,7 @@ const {createRandomManufacturerService} = require('./generators/manufacturer');
 const {createRandomVideoRecorderService} = require('./generators/video_recorder');
 const {createRandomTvService} = require('./generators/tv');
 const {createRandomTabletService} = require('./generators/tablet');
+const {createRandomSystemUnitService} = require('./generators/system_unit');
 
 // generate fake data for tables
 let users = createRandomUserService(4); // PRIMARY
@@ -31,6 +32,7 @@ let items_within_orders = new Array(4); // doesn't have its own generator becaus
 let video_recorders = createRandomVideoRecorderService(3);
 let tvs = createRandomTvService(3);
 let tablets = createRandomTabletService(3);
+let system_units = createRandomSystemUnitService(3);
 
 console.log(users);
 console.log(address_books);
@@ -46,6 +48,7 @@ console.log(items_within_orders);
 console.log(video_recorders);
 console.log(tvs);
 console.log(tablets);
+console.log(system_units);
 
 (async () => {
       const createdUsers = await User.bulkCreate(users);
@@ -258,9 +261,9 @@ console.log(tablets);
       tablets = createCategoryItems(tablets, available_item_ids);
       await Tablet.bulkCreate(tablets);
 
-      // // 4) system_units
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 4) system_units
+      system_units = createCategoryItems(system_units, available_item_ids);
+      await System_unit.bulkCreate(system_units);
 
       // // 5) tv
       // tvs = createCategoryItems(tvs, available_item_ids);
