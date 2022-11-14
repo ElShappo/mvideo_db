@@ -1,3 +1,4 @@
+const {faker} = require('@faker-js/faker');
 const { Sequelize, Model, DataTypes, INTEGER } = require("sequelize");
 
 let sequelize = new Sequelize('mvideo_orm_2', 'postgres', 'mypass1', {
@@ -6,6 +7,7 @@ let sequelize = new Sequelize('mvideo_orm_2', 'postgres', 'mypass1', {
 });
 
 module.exports.retrieveArray = function(primaryTable, pk="id") {
+  // retrieves the array of indices from the passed ORM model (primaryTable)
     let arr = [];
     for (let i=0; i<primaryTable.length; ++i) {
         arr.push(primaryTable.at(i)[pk]);
@@ -14,7 +16,11 @@ module.exports.retrieveArray = function(primaryTable, pk="id") {
     return arr;
 }
 
-module.exports.categoryItemsCreator = function(arr) {
+module.exports.createCategoryItems = function(arr, available_item_ids) {
+  // template function to create items of various categories (tvs, video_recorders...) with unique ids
+  // arr - previously generated array of elements of the same category (array of tvs, video_recorders... (without ids))
+  // available_item_ids - self-explanatory
+
   for (let i=0; i<arr.length; ++i) {
     let randomId = faker.helpers.arrayElement(available_item_ids);
     let indexOfRandomId = available_item_ids.indexOf(randomId);
@@ -330,6 +336,40 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let Tablet = sequelize.define("tablet", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    display_size: {
+      type: DataTypes.FLOAT
+    },
+    rom_size: {
+      type: DataTypes.INTEGER
+    },
+    ram_size: {
+      type: DataTypes.INTEGER
+    },
+    cores_number: {
+      type: DataTypes.INTEGER
+    },
+    cpu_frequency: {
+      type: DataTypes.FLOAT
+    },
+    bluetooth_module: {
+      type: DataTypes.INTEGER
+    },
+    internet_standard: {
+      type: DataTypes.STRING
+    }
+  },
+  {timestamps: false,});
+
 (async () => {
   try {
     await sequelize.authenticate();
@@ -358,3 +398,4 @@ let User = sequelize.define("user", {
     module.exports.Items_within_order = Items_within_order;
     module.exports.Video_recorder = Video_recorder;
     module.exports.Tv = Tv;
+    module.exports.Tablet = Tablet;
