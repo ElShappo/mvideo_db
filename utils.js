@@ -260,6 +260,38 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let Video_recorder = sequelize.define("video_recorder", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    fps: {
+        type: DataTypes.STRING,
+    },
+    viewing_angle: {
+      type: DataTypes.INTEGER,
+    },
+    max_frame_frequency: {
+      type: DataTypes.INTEGER,
+    },
+    max_resolution: {
+      type: DataTypes.INTEGER,
+    },
+    is_night_shooting: {
+      type: DataTypes.BOOLEAN,
+    },
+    recording_interval: {
+      type: DataTypes.STRING,
+    },
+
+  },
+  {timestamps: false,});
+
 (async () => {
     try {
         await sequelize.authenticate();
@@ -281,3 +313,4 @@ let User = sequelize.define("user", {
     module.exports.Order = Order;
     module.exports.Items_within_store = Items_within_store;
     module.exports.Items_within_order = Items_within_order;
+    module.exports.Video_recorder = Video_recorder;

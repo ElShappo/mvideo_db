@@ -1,6 +1,6 @@
 'use strict';
 const {faker} = require('@faker-js/faker');
-const {retrieveArray, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order} = require('./utils')
+const {retrieveArray, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder} = require('./utils')
 
 // import generators 
 const {createRandomUserService} = require('./generators/user');
