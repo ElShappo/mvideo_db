@@ -1,6 +1,6 @@
 const { Sequelize, Model, DataTypes, INTEGER } = require("sequelize");
 
-let sequelize = new Sequelize('mvideo_orm_1', 'postgres', 'mypass1', {
+let sequelize = new Sequelize('mvideo_orm_2', 'postgres', 'mypass1', {
     host: 'localhost',
     dialect: 'postgres',
 });
@@ -10,6 +10,7 @@ module.exports.retrieveArray = function(primaryTable, pk="id") {
     for (let i=0; i<primaryTable.length; ++i) {
         arr.push(primaryTable.at(i)[pk]);
     }
+    console.log("Array: ", arr);
     return arr;
 }
 
@@ -145,21 +146,21 @@ let User = sequelize.define("user", {
   {timestamps: false,});
 
   let Favourite_item = sequelize.define("favourite_item", {
+    user_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: User,
+        key: 'id',
+      }
+  },
     item_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
     
         references: {
           model: Item,
-          key: 'id',
-        }
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-    
-        references: {
-          model: User,
           key: 'id',
         }
     },
@@ -188,6 +189,55 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let Order = sequelize.define("order", {
+    user_id: {
+        type: DataTypes.INTEGER,
+    
+        references: {
+          model: User,
+          key: 'id',
+        }
+    },
+    order_address: {
+        type: DataTypes.STRING,
+    },
+    order_date: {
+      type: DataTypes.DATE,
+    },
+    delivery_method: {
+      type: DataTypes.STRING,
+    },
+    order_price: {
+      type: DataTypes.FLOAT,
+    },
+    payment_method: {
+      type: DataTypes.STRING,
+    }
+  },
+  {timestamps: false,});
+
+  let Items_within_store = sequelize.define("items_within_store", {
+    store_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Store,
+        key: 'id',
+      }
+    },
+    item_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+    
+        references: {
+          model: Item,
+          key: 'id',
+        }
+    },
+  },
+  {timestamps: false,});
+
 (async () => {
     try {
         await sequelize.authenticate();
@@ -206,3 +256,5 @@ let User = sequelize.define("user", {
     module.exports.Store = Store;
     module.exports.Favourite_item = Favourite_item;
     module.exports.Favourite_store = Favourite_store;
+    module.exports.Order = Order;
+    module.exports.Items_within_store = Items_within_store;
