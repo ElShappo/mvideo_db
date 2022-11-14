@@ -404,6 +404,65 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let Smartphone = sequelize.define("smartphone", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    display: {
+      type: DataTypes.FLOAT
+    },
+    cpu_type: {
+      type: DataTypes.STRING
+    },
+    rom: {
+      type: DataTypes.INTEGER,
+    },
+    camera_quality: {
+      type: DataTypes.ARRAY(DataTypes.INTEGER)
+    },
+  },
+  {timestamps: false,});
+
+  let Laptop = sequelize.define("laptop", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    display_resolution: {
+      type: DataTypes.STRING
+    },
+    cpu_type: {
+      type: DataTypes.TEXT
+    },
+    ssd_size: {
+      type: DataTypes.INTEGER,
+    },
+    os: {
+      type: DataTypes.STRING
+    },
+    video_card_type: {
+      type: DataTypes.TEXT
+    },
+    ram_size: {
+      type: DataTypes.INTEGER
+    },
+    weight: {
+      type: DataTypes.INTEGER
+    }
+  },
+  {timestamps: false,});
+
 (async () => {
   try {
     await sequelize.authenticate();
@@ -434,3 +493,5 @@ let User = sequelize.define("user", {
     module.exports.Tv = Tv;
     module.exports.Tablet = Tablet;
     module.exports.System_unit = System_unit;
+    module.exports.Smartphone = Smartphone;
+    module.exports.Laptop = Laptop;

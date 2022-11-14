@@ -1,6 +1,6 @@
 'use strict';
 const {faker} = require('@faker-js/faker');
-const {retrieveArray, createCategoryItems, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder, Tv, Tablet, System_unit} = require('./utils')
+const {retrieveArray, createCategoryItems, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder, Tv, Tablet, System_unit, Smartphone, Laptop} = require('./utils')
 
 // import generators 
 const {createRandomUserService} = require('./generators/user');
@@ -14,6 +14,8 @@ const {createRandomVideoRecorderService} = require('./generators/video_recorder'
 const {createRandomTvService} = require('./generators/tv');
 const {createRandomTabletService} = require('./generators/tablet');
 const {createRandomSystemUnitService} = require('./generators/system_unit');
+const {createRandomSmartphoneService} = require('./generators/smartphone')
+const {createRandomLaptopService} = require('./generators/laptop');
 
 // generate fake data for tables
 let users = createRandomUserService(4); // PRIMARY
@@ -33,6 +35,8 @@ let video_recorders = createRandomVideoRecorderService(3);
 let tvs = createRandomTvService(3);
 let tablets = createRandomTabletService(3);
 let system_units = createRandomSystemUnitService(3);
+let smartphones = createRandomSmartphoneService(3);
+let laptops = createRandomLaptopService(3);
 
 console.log(users);
 console.log(address_books);
@@ -49,6 +53,8 @@ console.log(video_recorders);
 console.log(tvs);
 console.log(tablets);
 console.log(system_units);
+console.log(smartphones);
+console.log(laptops);
 
 (async () => {
       const createdUsers = await User.bulkCreate(users);
@@ -265,13 +271,13 @@ console.log(system_units);
       system_units = createCategoryItems(system_units, available_item_ids);
       await System_unit.bulkCreate(system_units);
 
-      // // 5) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 5) smartphones
+      smartphones = createCategoryItems(smartphones, available_item_ids);
+      await Smartphone.bulkCreate(smartphones);
 
-      // // 6) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 6) laptops
+      laptops = createCategoryItems(laptops, available_item_ids);
+      await Laptop.bulkCreate(laptops);
 
       // // 7) tv
       // tvs = createCategoryItems(tvs, available_item_ids);
