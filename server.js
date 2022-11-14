@@ -1,6 +1,6 @@
 'use strict';
 const {faker} = require('@faker-js/faker');
-const {retrieveArray, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder} = require('./utils')
+const {retrieveArray, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder, Tv} = require('./utils')
 
 // import generators 
 const {createRandomUserService} = require('./generators/user');
@@ -11,6 +11,7 @@ const {createRandomCartService} = require('./generators/cart');
 const {createRandomOrderService} = require('./generators/order');
 const {createRandomManufacturerService} = require('./generators/manufacturer');
 const {createRandomVideoRecorderService} = require('./generators/video_recorder');
+const {createRandomTvService} = require('./generators/tv');
 
 // generate fake data for tables
 let users = createRandomUserService(4); // PRIMARY
@@ -26,9 +27,8 @@ let items_within_stores = new Array(4); // doesn't have its own generator becaus
 let items_within_orders = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
 
 // all tables below have FK: id -> id (item)
-
 let video_recorders = createRandomVideoRecorderService(4);
-
+let tvs = createRandomTvService(4);
 
 console.log(users);
 console.log(address_books);
@@ -42,6 +42,7 @@ console.log(orders);
 console.log(items_within_stores);
 console.log(items_within_orders);
 console.log(video_recorders);
+console.log(tvs);
 
 (async () => {
       const createdUsers = await User.bulkCreate(users);
@@ -240,7 +241,7 @@ console.log(video_recorders);
 
 
       // categories section
-
+      // 1) video_recorder
       let available_item_ids = retrieveArray(createdItems);
       
       for (let i=0; i<video_recorders.length; ++i) {
@@ -254,5 +255,7 @@ console.log(video_recorders);
         // console.dir(video_recorders[i]);
       }
       await Video_recorder.bulkCreate(video_recorders);
+
+      // 2)
   
     })();

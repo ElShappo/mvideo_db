@@ -292,6 +292,34 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let Tv = sequelize.define("tv", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    is_hdr: {
+      type: DataTypes.BOOLEAN
+    },
+    is_smarttv: {
+      type: DataTypes.BOOLEAN
+    },
+    is_bluetooth_module: {
+      type: DataTypes.BOOLEAN
+    },
+    os: {
+      type: DataTypes.TEXT
+    },
+    is_wifi: {
+      type: DataTypes.BOOLEAN
+    },
+  },
+  {timestamps: false,});
+
 (async () => {
   try {
     await sequelize.authenticate();
@@ -319,3 +347,4 @@ let User = sequelize.define("user", {
     module.exports.Items_within_store = Items_within_store;
     module.exports.Items_within_order = Items_within_order;
     module.exports.Video_recorder = Video_recorder;
+    module.exports.Tv = Tv;
