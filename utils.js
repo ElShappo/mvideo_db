@@ -238,6 +238,28 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let Items_within_order = sequelize.define("items_within_order", {
+    order_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Order,
+        key: 'id',
+      }
+    },
+    item_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+    
+        references: {
+          model: Item,
+          key: 'id',
+        }
+    },
+  },
+  {timestamps: false,});
+
 (async () => {
     try {
         await sequelize.authenticate();
@@ -258,3 +280,4 @@ let User = sequelize.define("user", {
     module.exports.Favourite_store = Favourite_store;
     module.exports.Order = Order;
     module.exports.Items_within_store = Items_within_store;
+    module.exports.Items_within_order = Items_within_order;
