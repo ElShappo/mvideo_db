@@ -271,7 +271,7 @@ let User = sequelize.define("user", {
       }
     },
     fps: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
     },
     viewing_angle: {
       type: DataTypes.INTEGER,
@@ -286,21 +286,26 @@ let User = sequelize.define("user", {
       type: DataTypes.BOOLEAN,
     },
     recording_interval: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(10),
     },
 
   },
   {timestamps: false,});
 
 (async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-      }
-      await sequelize.sync();
-    })();
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+  try {
+    await sequelize.sync();
+    console.log("Tables have been synced!");
+  } catch (error) {
+    console.error("Unable to sync tables", error);
+  }
+})();
 
     module.exports.User = User;
     module.exports.Address_book = Address_book;

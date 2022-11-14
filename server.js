@@ -10,19 +10,25 @@ const {createRandomAddressBookService} = require('./generators/address_book');
 const {createRandomCartService} = require('./generators/cart');
 const {createRandomOrderService} = require('./generators/order');
 const {createRandomManufacturerService} = require('./generators/manufacturer');
+const {createRandomVideoRecorderService} = require('./generators/video_recorder');
 
 // generate fake data for tables
-let users = createRandomUserService(10); // PRIMARY
-let address_books = createRandomAddressBookService(10); // FK: user_id -> id (user)
-let manufacturers = createRandomManufacturerService(10); // PRIMARY
-let items = createRandomItemService(10); // FK: manufacturer_id -> id (manufacturer)
-let carts = createRandomCartService(10); // FK: user_id -> id (user), FK: item_id -> id (item)
-let favourite_items = new Array(10); // doesn't have its own generator because this table is comprised of FK's only
-let stores = createRandomStoreService(10); // PRIMARY
-let favourite_stores = new Array(10); // doesn't have its own generator because this table is comprised of FK's only
-let orders = createRandomOrderService(30); // FK: user_id -> id (user)
-let items_within_stores = new Array(10); // doesn't have its own generator because this table is comprised of FK's only
-let items_within_orders = new Array(10); // doesn't have its own generator because this table is comprised of FK's only
+let users = createRandomUserService(4); // PRIMARY
+let address_books = createRandomAddressBookService(4); // FK: user_id -> id (user)
+let manufacturers = createRandomManufacturerService(4); // PRIMARY
+let items = createRandomItemService(4); // FK: manufacturer_id -> id (manufacturer)
+let carts = createRandomCartService(4); // FK: user_id -> id (user), FK: item_id -> id (item)
+let favourite_items = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
+let stores = createRandomStoreService(4); // PRIMARY
+let favourite_stores = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
+let orders = createRandomOrderService(4); // FK: user_id -> id (user)
+let items_within_stores = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
+let items_within_orders = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
+
+// all tables below have FK: id -> id (item)
+
+let video_recorders = createRandomVideoRecorderService(4);
+
 
 console.log(users);
 console.log(address_books);
@@ -35,6 +41,7 @@ console.log(favourite_stores);
 console.log(orders);
 console.log(items_within_stores);
 console.log(items_within_orders);
+console.log(video_recorders);
 
 (async () => {
       const createdUsers = await User.bulkCreate(users);
@@ -231,5 +238,21 @@ console.log(items_within_orders);
       await Items_within_order.bulkCreate(items_within_orders);
 
 
+
+      // categories section
+
+      let available_item_ids = retrieveArray(createdItems);
+      
+      for (let i=0; i<video_recorders.length; ++i) {
+        let randomId = faker.helpers.arrayElement(available_item_ids);
+        // console.log("RANDOM CHOSEN: ");
+        // console.log(randomId);
+        let indexOfRandomId = available_item_ids.indexOf(randomId);
+        available_item_ids.splice(indexOfRandomId, 1);
+        video_recorders[i] = Object.assign({id: randomId}, video_recorders[i]);
+        // console.log("VIDEO RECORDER: ");
+        // console.dir(video_recorders[i]);
+      }
+      await Video_recorder.bulkCreate(video_recorders);
   
     })();
