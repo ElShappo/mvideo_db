@@ -1,6 +1,6 @@
 'use strict';
 const {faker} = require('@faker-js/faker');
-const {retrieveArray, createCategoryItems, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder, Tv, Tablet, System_unit, Smartphone, Laptop} = require('./utils')
+const {retrieveArray, createCategoryItems, User, Address_book, Manufacturer, Item, Cart, Favourite_item, Store, Favourite_store, Order, Items_within_store, Items_within_order, Video_recorder, Tv, Tablet, System_unit, Smartphone, Laptop, Hoover, Headphone, Grinder, Game_console, Fridge, Camera} = require('./utils')
 
 // import generators 
 const {createRandomUserService} = require('./generators/user');
@@ -16,6 +16,12 @@ const {createRandomTabletService} = require('./generators/tablet');
 const {createRandomSystemUnitService} = require('./generators/system_unit');
 const {createRandomSmartphoneService} = require('./generators/smartphone')
 const {createRandomLaptopService} = require('./generators/laptop');
+const {createRandomHooverService} = require('./generators/hoover');
+const {createRandomHeadphoneService} = require('./generators/headphone');
+const {createRandomGrinderService} = require('./generators/grinder');
+const {createRandomGameConsoleService} = require('./generators/game_console');
+const {createRandomFridgeService} = require('./generators/fridge');
+const {createRandomCameraService} = require('./generators/camera');
 
 // generate fake data for tables
 let users = createRandomUserService(4); // PRIMARY
@@ -37,6 +43,12 @@ let tablets = createRandomTabletService(3);
 let system_units = createRandomSystemUnitService(3);
 let smartphones = createRandomSmartphoneService(3);
 let laptops = createRandomLaptopService(3);
+let hoovers = createRandomHooverService(3);
+let headphones = createRandomHeadphoneService(3);
+let grinders = createRandomGrinderService(3);
+let game_consoles = createRandomGameConsoleService(3);
+let fridges = createRandomFridgeService(3);
+let cameras = createRandomCameraService(3);
 
 console.log(users);
 console.log(address_books);
@@ -55,6 +67,12 @@ console.log(tablets);
 console.log(system_units);
 console.log(smartphones);
 console.log(laptops);
+console.log(hoovers);
+console.log(headphones);
+console.log(grinders);
+console.log(game_consoles);
+console.log(fridges);
+console.log(cameras);
 
 (async () => {
       const createdUsers = await User.bulkCreate(users);
@@ -279,27 +297,27 @@ console.log(laptops);
       laptops = createCategoryItems(laptops, available_item_ids);
       await Laptop.bulkCreate(laptops);
 
-      // // 7) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 7) hoovers
+      hoovers = createCategoryItems(hoovers, available_item_ids);
+      await Hoover.bulkCreate(hoovers);
 
-      // // 8) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 8) headphone
+      headphones = createCategoryItems(headphones, available_item_ids);
+      await Headphone.bulkCreate(headphones);
 
-      // // 9) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 9) grinders
+      grinders = createCategoryItems(grinders, available_item_ids);
+      await Grinder.bulkCreate(grinders);
 
-      // // 10) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 10) game_consoles
+      game_consoles = createCategoryItems(game_consoles, available_item_ids);
+      await Game_console.bulkCreate(game_consoles);
 
-      // // 11) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 11) fridges
+      fridges = createCategoryItems(fridges, available_item_ids);
+      await Fridge.bulkCreate(fridges);
 
-      // // 12) tv
-      // tvs = createCategoryItems(tvs, available_item_ids);
-      // await Tv.bulkCreate(tvs);
+      // 12) cameras
+      cameras = createCategoryItems(cameras, available_item_ids);
+      await Camera.bulkCreate(cameras);
     })();

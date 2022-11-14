@@ -463,6 +463,218 @@ let User = sequelize.define("user", {
   },
   {timestamps: false,});
 
+  let Hoover = sequelize.define("hoover", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    suction_power: {
+      type: DataTypes.INTEGER
+    },
+    nozzles_number: {
+      type: DataTypes.INTEGER
+    },
+    power_cord_length: {
+      type: DataTypes.INTEGER
+    },
+    power_consumption: {
+      type: DataTypes.INTEGER
+    },
+    is_upright: {
+      type: DataTypes.BOOLEAN
+    },
+    weight: {
+      type: DataTypes.INTEGER
+    },
+    guarantee_period: {
+      type: DataTypes.INTEGER
+    }
+
+  },
+  {timestamps: false,});
+
+  let Headphone = sequelize.define("headphone", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    connection_type: {
+      type: DataTypes.STRING
+    },
+    color: {
+      type: DataTypes.STRING
+    },
+    min_frequency: {
+      type: DataTypes.INTEGER
+    },
+    max_frequency: {
+      type: DataTypes.INTEGER
+    },
+    sensitivity: {
+      type: DataTypes.INTEGER
+    },
+    ear_pads_material: {
+      type: DataTypes.STRING
+    },
+    guarantee_period: {
+      type: DataTypes.INTEGER
+    },
+    is_headset: {
+      type: DataTypes.BOOLEAN
+    }
+
+  },
+  {timestamps: false,});
+
+  let Grinder = sequelize.define("grinder", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    max_wheel_diameter: {
+      type: DataTypes.INTEGER
+    },
+    landing_hole_diameter: {
+      type: DataTypes.FLOAT
+    },
+    max_rotation_speed: {
+      type: DataTypes.INTEGER
+    },
+    power_consumption: {
+      type: DataTypes.INTEGER
+    },
+    guarantee_period: {
+      type: DataTypes.INTEGER
+    },
+    wheels_number: {
+      type: DataTypes.INTEGER
+    }
+
+
+  },
+  {timestamps: false,});
+
+  let Game_console = sequelize.define("game_console", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    ssd_size: {
+      type: DataTypes.INTEGER
+    },
+    is_hdr: {
+      type: DataTypes.BOOLEAN
+    },
+    wifi: {
+      type: DataTypes.STRING(50)
+    },
+    guarantee_period: {
+      type: DataTypes.INTEGER
+    },
+    is_wireless_gamepad: {
+      type: DataTypes.BOOLEAN
+    }
+  },
+  {timestamps: false,});
+
+  let Fridge = sequelize.define("fridge", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    color: {
+      type: DataTypes.STRING
+    },
+    freezer_volume: {
+      type: DataTypes.INTEGER
+    },
+    cooling_chamber_volume: {
+      type: DataTypes.INTEGER
+    },
+    is_freezer_frost: {
+      type: DataTypes.BOOLEAN
+    },
+    is_cooling_frost: {
+      type: DataTypes.BOOLEAN
+    },
+    is_indication: {
+      type: DataTypes.BOOLEAN
+    },
+    regulated_shelves_number: {
+      type: DataTypes.INTEGER
+    },
+    control_type: {
+      type: DataTypes.STRING
+    }
+  },
+  {timestamps: false,});
+
+  let Camera = sequelize.define("camera", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+  
+      references: {
+        model: Item,
+        key: 'id',
+      }
+    },
+    matrix_resolution: {
+      type: DataTypes.FLOAT
+    },
+    zoom: {
+      type: DataTypes.FLOAT
+    },
+    matrix_size: {
+      type: DataTypes.ARRAY(DataTypes.INTEGER)
+    },
+    focus_min: {
+      type: DataTypes.INTEGER
+    },
+    focus_max: {
+      type: DataTypes.INTEGER
+    },
+    quality: {
+      type: DataTypes.STRING(100)
+    },
+    matrix_type: {
+      type: DataTypes.STRING(50)
+    },
+    frame_frequency: {
+      type: DataTypes.INTEGER
+    },
+    is_wifi: {
+      type: DataTypes.BOOLEAN
+    }
+
+  },
+  {timestamps: false,});
+
 (async () => {
   try {
     await sequelize.authenticate();
@@ -495,3 +707,9 @@ let User = sequelize.define("user", {
     module.exports.System_unit = System_unit;
     module.exports.Smartphone = Smartphone;
     module.exports.Laptop = Laptop;
+    module.exports.Hoover = Hoover;
+    module.exports.Headphone = Headphone;
+    module.exports.Grinder = Grinder;
+    module.exports.Game_console = Game_console;
+    module.exports.Fridge = Fridge;
+    module.exports.Camera = Camera;
