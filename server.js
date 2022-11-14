@@ -17,7 +17,7 @@ const {createRandomTvService} = require('./generators/tv');
 let users = createRandomUserService(4); // PRIMARY
 let address_books = createRandomAddressBookService(4); // FK: user_id -> id (user)
 let manufacturers = createRandomManufacturerService(4); // PRIMARY
-let items = createRandomItemService(4); // FK: manufacturer_id -> id (manufacturer)
+let items = createRandomItemService(36); // FK: manufacturer_id -> id (manufacturer)
 let carts = createRandomCartService(4); // FK: user_id -> id (user), FK: item_id -> id (item)
 let favourite_items = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
 let stores = createRandomStoreService(4); // PRIMARY
@@ -27,8 +27,8 @@ let items_within_stores = new Array(4); // doesn't have its own generator becaus
 let items_within_orders = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
 
 // all tables below have FK: id -> id (item)
-let video_recorders = createRandomVideoRecorderService(4);
-let tvs = createRandomTvService(4);
+let video_recorders = createRandomVideoRecorderService(3);
+let tvs = createRandomTvService(3);
 
 console.log(users);
 console.log(address_books);
@@ -241,21 +241,23 @@ console.log(tvs);
 
 
       // categories section
-      // 1) video_recorder
       let available_item_ids = retrieveArray(createdItems);
-      
+
+      // 1) video_recorder
       for (let i=0; i<video_recorders.length; ++i) {
         let randomId = faker.helpers.arrayElement(available_item_ids);
-        // console.log("RANDOM CHOSEN: ");
-        // console.log(randomId);
         let indexOfRandomId = available_item_ids.indexOf(randomId);
         available_item_ids.splice(indexOfRandomId, 1);
         video_recorders[i] = Object.assign({id: randomId}, video_recorders[i]);
-        // console.log("VIDEO RECORDER: ");
-        // console.dir(video_recorders[i]);
       }
       await Video_recorder.bulkCreate(video_recorders);
 
-      // 2)
-  
+      // 2) tv
+      for (let i=0; i<tvs.length; ++i) {
+        let randomId = faker.helpers.arrayElement(available_item_ids);
+        let indexOfRandomId = available_item_ids.indexOf(randomId);
+        available_item_ids.splice(indexOfRandomId, 1);
+        tvs[i] = Object.assign({id: randomId}, tvs[i]);
+      }
+      await Tv.bulkCreate(tvs);
     })();

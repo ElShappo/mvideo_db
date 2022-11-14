@@ -14,6 +14,16 @@ module.exports.retrieveArray = function(primaryTable, pk="id") {
     return arr;
 }
 
+module.exports.categoryItemsCreator = function(arr) {
+  for (let i=0; i<arr.length; ++i) {
+    let randomId = faker.helpers.arrayElement(available_item_ids);
+    let indexOfRandomId = available_item_ids.indexOf(randomId);
+    available_item_ids.splice(indexOfRandomId, 1);
+    arr[i] = Object.assign({id: randomId}, arr[i]);
+  }
+  return arr;
+}
+
 let User = sequelize.define("user", {
     name: {
         type: DataTypes.STRING,

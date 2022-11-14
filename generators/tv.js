@@ -5,7 +5,7 @@ function createRandomTv() {
       is_hdr: faker.datatype.boolean(),
       // hdr_type: faker.helpers.arrayElement(['HDR10+', '']),
       is_smarttv: faker.datatype.boolean(),
-      is_bluetooth_module: faker.datatype.bool(),
+      is_bluetooth_module: faker.datatype.boolean(),
       os: faker.helpers.arrayElement(['vidaa 4.2', 'WebOS', 'android 10.0']), 
       is_wifi: faker.datatype.boolean()
     };
