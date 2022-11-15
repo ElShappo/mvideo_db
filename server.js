@@ -24,31 +24,31 @@ const {createRandomFridgeService} = require('./generators/fridge');
 const {createRandomCameraService} = require('./generators/camera');
 
 // generate fake data for tables
-let users = createRandomUserService(4); // PRIMARY
-let address_books = createRandomAddressBookService(4); // FK: user_id -> id (user)
-let manufacturers = createRandomManufacturerService(4); // PRIMARY
-let items = createRandomItemService(36); // FK: manufacturer_id -> id (manufacturer)
-let carts = createRandomCartService(4); // FK: user_id -> id (user), FK: item_id -> id (item)
-let favourite_items = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
-let stores = createRandomStoreService(4); // PRIMARY
+let users = createRandomUserService(150); // PRIMARY
+let address_books = createRandomAddressBookService(150); // FK: user_id -> id (user)
+let manufacturers = createRandomManufacturerService(200); // PRIMARY
+let items = createRandomItemService(1000); // FK: manufacturer_id -> id (manufacturer)
+let carts = createRandomCartService(150); // FK: user_id -> id (user), FK: item_id -> id (item)
+let favourite_items = new Array(50); // doesn't have its own generator because this table is comprised of FK's only
+let stores = createRandomStoreService(40); // PRIMARY
 let favourite_stores = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
-let orders = createRandomOrderService(4); // FK: user_id -> id (user)
+let orders = createRandomOrderService(100); // FK: user_id -> id (user)
 let items_within_stores = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
 let items_within_orders = new Array(4); // doesn't have its own generator because this table is comprised of FK's only
 
 // all tables below have FK: id -> id (item)
-let video_recorders = createRandomVideoRecorderService(3);
-let tvs = createRandomTvService(3);
-let tablets = createRandomTabletService(3);
-let system_units = createRandomSystemUnitService(3);
-let smartphones = createRandomSmartphoneService(3);
-let laptops = createRandomLaptopService(3);
-let hoovers = createRandomHooverService(3);
-let headphones = createRandomHeadphoneService(3);
-let grinders = createRandomGrinderService(3);
-let game_consoles = createRandomGameConsoleService(3);
-let fridges = createRandomFridgeService(3);
-let cameras = createRandomCameraService(3);
+let video_recorders = createRandomVideoRecorderService(30);
+let tvs = createRandomTvService(40);
+let tablets = createRandomTabletService(50);
+let system_units = createRandomSystemUnitService(25);
+let smartphones = createRandomSmartphoneService(70);
+let laptops = createRandomLaptopService(100);
+let hoovers = createRandomHooverService(45);
+let headphones = createRandomHeadphoneService(90);
+let grinders = createRandomGrinderService(120);
+let game_consoles = createRandomGameConsoleService(110);
+let fridges = createRandomFridgeService(70);
+let cameras = createRandomCameraService(150);
 
 console.log(users);
 console.log(address_books);
