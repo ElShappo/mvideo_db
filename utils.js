@@ -251,6 +251,9 @@ let User = sequelize.define("user", {
           key: 'id',
         }
     },
+    item_quantity: {
+      type: DataTypes.INTEGER
+    }
   },
   {timestamps: false,});
 
@@ -273,6 +276,9 @@ let User = sequelize.define("user", {
           key: 'id',
         }
     },
+    item_quantity: {
+      type: DataTypes.INTEGER
+    }
   },
   {timestamps: false,});
 

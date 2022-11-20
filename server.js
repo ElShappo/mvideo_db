@@ -207,6 +207,7 @@ console.log(cameras);
 
         let randomItemId = 0;
         let randomStoreId = 0;
+        let randomQuantity = faker.datatype.number({ min: 1, max: 10})
 
         while (true) {
         // this loop ensures that generated userId and itemId make up unique sequence (i.e. PK)
@@ -229,7 +230,7 @@ console.log(cameras);
             break;
           }
         }
-        items_within_stores[i] = {store_id: randomStoreId, item_id: randomItemId};
+        items_within_stores[i] = {store_id: randomStoreId, item_id: randomItemId, item_quantity: randomQuantity};
       }
 
       await Items_within_store.bulkCreate(items_within_stores);
@@ -241,6 +242,7 @@ console.log(cameras);
 
         let randomItemId = 0;
         let randomOrderId = 0;
+        let randomQuantity = faker.datatype.number({ min: 1, max: 10})
 
         while (true) {
         // this loop ensures that generated userId and itemId make up unique sequence (i.e. PK)
@@ -263,7 +265,7 @@ console.log(cameras);
             break;
           }
         }
-        items_within_orders[i] = {order_id: randomOrderId, item_id: randomItemId};
+        items_within_orders[i] = {order_id: randomOrderId, item_id: randomItemId, item_quantity: randomQuantity};
       }
 
       await Items_within_order.bulkCreate(items_within_orders);
