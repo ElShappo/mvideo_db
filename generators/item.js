@@ -7,6 +7,7 @@ function createRandomItem() {
       description: faker.commerce.productDescription(),
     //   available_amount: faker.datatype.number({min: 0}),
       category_id: faker.datatype.number({min: 0}),
+    category_name: faker.helpers.arrayElement(['video_recorder', 'tv', 'tablet', 'system_unit', 'smartphone', 'laptop', 'hoover', 'headphone', 'grinder', 'game_console', 'fridge', 'camera'])
       // manufacturer_id: faker.datatype.number({min: 0})
     };
 }

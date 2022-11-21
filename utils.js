@@ -114,6 +114,9 @@ let User = sequelize.define("user", {
     description: {
         type: DataTypes.STRING
     },
+    category_name: {
+      type: DataTypes.STRING,
+    },
     manufacturer_id: {
         type: DataTypes.INTEGER,
     

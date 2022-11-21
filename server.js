@@ -27,7 +27,7 @@ const {createRandomCameraService} = require('./generators/camera');
 let users = createRandomUserService(150); // PRIMARY
 let address_books = createRandomAddressBookService(150); // FK: user_id -> id (user)
 let manufacturers = createRandomManufacturerService(200); // PRIMARY
-let items = createRandomItemService(1000); // FK: manufacturer_id -> id (manufacturer)
+let items = createRandomItemService(8000); // FK: manufacturer_id -> id (manufacturer)
 let carts = createRandomCartService(150); // FK: user_id -> id (user), FK: item_id -> id (item)
 let favourite_items = new Array(50); // doesn't have its own generator because this table is comprised of FK's only
 let stores = createRandomStoreService(40); // PRIMARY
@@ -276,50 +276,50 @@ console.log(cameras);
       let available_item_ids = retrieveArray(createdItems);
 
       // 1) video_recorder
-      video_recorders = createCategoryItems(video_recorders, available_item_ids);
+      video_recorders = createCategoryItems(video_recorders, available_item_ids.filter(x => x % 12 === 0));
       await Video_recorder.bulkCreate(video_recorders);
 
       // 2) tv
-      tvs = createCategoryItems(tvs, available_item_ids);
+      tvs = createCategoryItems(tvs, available_item_ids.filter(x => x % 12 === 1));
       await Tv.bulkCreate(tvs);
 
       // 3) tablets
-      tablets = createCategoryItems(tablets, available_item_ids);
+      tablets = createCategoryItems(tablets, available_item_ids.filter(x => x % 12 === 2));
       await Tablet.bulkCreate(tablets);
 
       // 4) system_units
-      system_units = createCategoryItems(system_units, available_item_ids);
+      system_units = createCategoryItems(system_units, available_item_ids.filter(x => x % 12 === 3));
       await System_unit.bulkCreate(system_units);
 
       // 5) smartphones
-      smartphones = createCategoryItems(smartphones, available_item_ids);
+      smartphones = createCategoryItems(smartphones, available_item_ids.filter(x => x % 12 === 4));
       await Smartphone.bulkCreate(smartphones);
 
       // 6) laptops
-      laptops = createCategoryItems(laptops, available_item_ids);
+      laptops = createCategoryItems(laptops, available_item_ids.filter(x => x % 12 === 5));
       await Laptop.bulkCreate(laptops);
 
       // 7) hoovers
-      hoovers = createCategoryItems(hoovers, available_item_ids);
+      hoovers = createCategoryItems(hoovers, available_item_ids.filter(x => x % 12 === 6));
       await Hoover.bulkCreate(hoovers);
 
       // 8) headphone
-      headphones = createCategoryItems(headphones, available_item_ids);
+      headphones = createCategoryItems(headphones, available_item_ids.filter(x => x % 12 === 7));
       await Headphone.bulkCreate(headphones);
 
       // 9) grinders
-      grinders = createCategoryItems(grinders, available_item_ids);
+      grinders = createCategoryItems(grinders, available_item_ids.filter(x => x % 12 === 8));
       await Grinder.bulkCreate(grinders);
 
       // 10) game_consoles
-      game_consoles = createCategoryItems(game_consoles, available_item_ids);
+      game_consoles = createCategoryItems(game_consoles, available_item_ids.filter(x => x % 12 === 9));
       await Game_console.bulkCreate(game_consoles);
 
       // 11) fridges
-      fridges = createCategoryItems(fridges, available_item_ids);
+      fridges = createCategoryItems(fridges, available_item_ids.filter(x => x % 12 === 10));
       await Fridge.bulkCreate(fridges);
 
       // 12) cameras
-      cameras = createCategoryItems(cameras, available_item_ids);
+      cameras = createCategoryItems(cameras, available_item_ids.filter(x => x % 12 === 11));
       await Camera.bulkCreate(cameras);
     })();
